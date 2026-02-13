@@ -365,8 +365,9 @@ quiz_data = [
 
 # --- セッション状態の初期化 ---
 if 'shuffled_quiz_data' not in st.session_state:
-    st.session_state.shuffled_quiz_data = quiz_data.copy()
-    random.shuffle(st.session_state.shuffled_quiz_data)
+    full_data = quiz_data.copy()
+    random.shuffle(full_data)
+    st.session_state.shuffled_quiz_data = full_data[:10]
 
 if 'current_question_index' not in st.session_state:
     st.session_state.current_question_index = 0
@@ -382,8 +383,9 @@ if 'last_answer_correct' not in st.session_state:
 # --- 関数定義 ---
 def restart_quiz():
     """クイズをリセットして最初から始める"""
-    st.session_state.shuffled_quiz_data = quiz_data.copy()
-    random.shuffle(st.session_state.shuffled_quiz_data)
+    full_data = quiz_data.copy()
+    random.shuffle(full_data)
+    st.session_state.shuffled_quiz_data = full_data[:10]
     st.session_state.current_question_index = 0
     st.session_state.score = 0
     st.session_state.quiz_finished = False
